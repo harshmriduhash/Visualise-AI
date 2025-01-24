@@ -1,6 +1,6 @@
-import { openai } from './openai';
-import { supabase } from './supabase';
-import { z } from 'zod';
+import { openai } from "./openai";
+import { supabase } from "./supabase";
+import { z } from "zod";
 
 const dreamSchema = z.object({
   description: z.string().min(10).max(1000),
@@ -17,7 +17,10 @@ export type Dream = {
   createdAt: Date;
 };
 
-export async function createDream(description: string, mood: string): Promise<Dream> {
+export async function createDream(
+  description: string,
+  mood: string
+): Promise<Dream> {
   const parsed = dreamSchema.parse({ description, mood });
 
   try {
@@ -38,7 +41,8 @@ export async function createDream(description: string, mood: string): Promise<Dr
       messages: [
         {
           role: "system",
-          content: "You are a creative writer who specializes in turning dream descriptions into vivid, engaging stories. Keep the tone matching the specified mood.",
+          content:
+            "You are a creative writer who specializes in turning dream descriptions into vivid, engaging stories. Keep the tone matching the specified mood.",
         },
         {
           role: "user",
@@ -56,7 +60,7 @@ export async function createDream(description: string, mood: string): Promise<Dr
 
     // Save to Supabase
     const { data: dream, error } = await supabase
-      .from('dreams')
+      .from("dreams")
       .insert([
         {
           description: parsed.description,
@@ -70,7 +74,7 @@ export async function createDream(description: string, mood: string): Promise<Dr
       .single();
 
     if (error) {
-      throw new Error('Failed to save dream to database');
+      throw new Error("Failed to save dream to database");
     }
 
     return {
@@ -83,8 +87,10 @@ export async function createDream(description: string, mood: string): Promise<Dr
       createdAt: new Date(dream.created_at),
     };
   } catch (error: any) {
-    if (error?.error?.code === 'billing_hard_limit_reached') {
-      throw new Error('The AI service is currently unavailable. Please try again later.');
+    if (error?.error?.code === "billing_hard_limit_reached") {
+      throw new Error(
+        "The AI service is currently unavailable. Please try again later."
+      );
     }
     throw error;
   }
@@ -92,9 +98,9 @@ export async function createDream(description: string, mood: string): Promise<Dr
 
 export async function getDreams(): Promise<Dream[]> {
   const { data: dreams, error } = await supabase
-    .from('dreams')
-    .select('*')
-    .order('created_at', { ascending: false });
+    .from("dreams")
+    .select("*")
+    .order("created_at", { ascending: false });
 
   if (error) throw error;
 
