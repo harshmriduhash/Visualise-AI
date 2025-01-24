@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { Sparkles, Music, BookOpen } from 'lucide-react';
-import { cn } from '../lib/utils';
-import { createDream } from '../lib/api';
-import { toast } from 'sonner';
+import React, { useState } from "react";
+import { Sparkles, Music, BookOpen } from "lucide-react";
+import { cn } from "../lib/utils";
+import { createDream } from "../lib/api";
+import { toast } from "sonner";
 
 const moods = [
-  'Mysterious',
-  'Happy',
-  'Adventurous',
-  'Calm',
-  'Energetic',
-  'Melancholic',
-  'Dreamy',
-  'Romantic',
+  "Mysterious",
+  "Happy",
+  "Adventurous",
+  "Calm",
+  "Energetic",
+  "Melancholic",
+  "Dreamy",
+  "Romantic",
 ];
 
 interface DreamInputProps {
@@ -24,8 +24,8 @@ interface DreamInputProps {
 }
 
 export function DreamInput({ onDreamCreated }: DreamInputProps) {
-  const [dream, setDream] = useState('');
-  const [mood, setMood] = useState('');
+  const [dream, setDream] = useState("");
+  const [mood, setMood] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,12 +39,14 @@ export function DreamInput({ onDreamCreated }: DreamInputProps) {
         audioUrl: result.audioUrl,
         story: result.story,
       });
-      toast.success('Your dream has been woven into reality!');
-      setDream('');
-      setMood('');
+      toast.success("Your dream has been woven into reality!");
+      setDream("");
+      setMood("");
     } catch (error: any) {
-      console.error('Error creating dream:', error);
-      toast.error(error.message || 'Failed to weave your dream. Please try again.');
+      console.error("Error creating dream:", error);
+      toast.error(
+        error.message || "Failed to weave your dream. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -95,14 +97,14 @@ export function DreamInput({ onDreamCreated }: DreamInputProps) {
           type="submit"
           disabled={isLoading || !dream || !mood}
           className={cn(
-            'px-8 py-3 rounded-full font-medium text-white transition-all',
-            'bg-gradient-to-r from-dream-lavender via-dream-blue to-dream-pink',
-            'hover:shadow-lg hover:scale-105',
-            'disabled:opacity-50 disabled:cursor-not-allowed',
-            isLoading && 'animate-shimmer bg-[length:200%_100%]'
+            "px-8 py-3 rounded-full font-medium text-white transition-all",
+            "bg-gradient-to-r from-dream-lavender via-dream-blue to-dream-pink",
+            "hover:shadow-lg hover:scale-105",
+            "disabled:opacity-50 disabled:cursor-not-allowed",
+            isLoading && "animate-shimmer bg-[length:200%_100%]"
           )}
         >
-          {isLoading ? 'Weaving dreams...' : 'Create Dream'}
+          {isLoading ? "Weaving dreams..." : "Create Dream"}
         </button>
       </div>
 
