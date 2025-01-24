@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Sparkles } from 'lucide-react';
-import { DreamInput } from './components/DreamInput';
-import { ResultsDisplay } from './components/ResultsDisplay';
-import { Toaster } from 'sonner';
+import React, { useState } from "react";
+import { Sparkles } from "lucide-react";
+import { DreamInput } from "./components/DreamInput";
+import { ResultsDisplay } from "./components/ResultsDisplay";
+import { Toaster } from "sonner";
 
 function App() {
   const [results, setResults] = useState<{
@@ -18,11 +18,12 @@ function App() {
           <div className="inline-flex items-center space-x-2">
             <Sparkles className="w-8 h-8 text-dream-blue" />
             <h1 className="text-4xl font-bold bg-gradient-to-r from-dream-blue via-dream-lavender to-dream-pink bg-clip-text text-transparent">
-            Visualise AI
+              Visualise AI
             </h1>
           </div>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Transform your dreams into art, music, and stories using the power of AI
+            Transform your dreams into art, music, and stories using the power
+            of AI
           </p>
         </header>
 
